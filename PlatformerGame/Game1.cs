@@ -76,7 +76,6 @@ namespace PlatformerGame
 
         }
 
-
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
