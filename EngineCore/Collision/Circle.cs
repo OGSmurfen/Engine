@@ -86,9 +86,56 @@ namespace EngineCore.Collision
             Radius = radius;
         }
 
-        public bool Equals(Circle other)
+        /// <summary>
+        /// Returns a value that indicates whether the specified circle intersects with this circle.
+        /// </summary>
+        /// <param name="other">The other circle to check.</param>
+        /// <returns>true if the other circle intersects with this circle; otherwise, false.</returns>
+        public bool Intersects(Circle other)
         {
-            throw new NotImplementedException();
+            int radiiSquared = (this.Radius + other.Radius) * (this.Radius + other.Radius);
+            float distanceSquared = Vector2.DistanceSquared(this.Location.ToVector2(), other.Location.ToVector2());
+            return distanceSquared < radiiSquared;
         }
+
+        /// <summary>
+        /// Returns a value that indicates whether this circle and the specified object are equal
+        /// </summary>
+        /// <param name="obj">The object to compare with this circle.</param>
+        /// <returns>true if this circle and the specified object are equal; otherwise, false.</returns>
+        public override readonly bool Equals(object obj) => obj is Circle other && Equals(other);
+
+        /// <summary>
+        /// Returns a value that indicates whether this circle and the specified circle are equal.
+        /// </summary>
+        /// <param name="other">The circle to compare with this circle.</param>
+        /// <returns>true if this circle and the specified circle are equal; otherwise, false.</returns>
+        public readonly bool Equals(Circle other) => this.X == other.X &&
+                                                        this.Y == other.Y &&
+                                                        this.Radius == other.Radius;
+
+        /// <summary>
+        /// Returns the hash code for this circle.
+        /// </summary>
+        /// <returns>The hash code for this circle as a 32-bit signed integer.</returns>
+        public override readonly int GetHashCode() => HashCode.Combine(X, Y, Radius);
+
+        /// <summary>
+        /// Returns a value that indicates if the circle on the left hand side of the equality operator is equal to the
+        /// circle on the right hand side of the equality operator.
+        /// </summary>
+        /// <param name="lhs">The circle on the left hand side of the equality operator.</param>
+        /// <param name="rhs">The circle on the right hand side of the equality operator.</param>
+        /// <returns>true if the two circles are equal; otherwise, false.</returns>
+        public static bool operator ==(Circle lhs, Circle rhs) => lhs.Equals(rhs);
+
+        /// <summary>
+        /// Returns a value that indicates if the circle on the left hand side of the inequality operator is not equal to the
+        /// circle on the right hand side of the inequality operator.
+        /// </summary>
+        /// <param name="lhs">The circle on the left hand side of the inequality operator.</param>
+        /// <param name="rhs">The circle on the right hand side fo the inequality operator.</param>
+        /// <returns>true if the two circle are not equal; otherwise, false.</returns>
+        public static bool operator !=(Circle lhs, Circle rhs) => !lhs.Equals(rhs);
     }
 }
