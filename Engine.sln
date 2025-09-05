@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformerGame", "Platforme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineCore", "MonoGameLibrary\EngineCore.csproj", "{D7BF149C-BB51-424E-ACF1-B359DA7400F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{9F829605-6761-435C-B712-99F6CD3D2B10}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Input", "Input\Input.csproj", "{6C40C09E-11AD-4325-BAE8-32EB0D0E9DF9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{D7BF149C-BB51-424E-ACF1-B359DA7400F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7BF149C-BB51-424E-ACF1-B359DA7400F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7BF149C-BB51-424E-ACF1-B359DA7400F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F829605-6761-435C-B712-99F6CD3D2B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F829605-6761-435C-B712-99F6CD3D2B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F829605-6761-435C-B712-99F6CD3D2B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F829605-6761-435C-B712-99F6CD3D2B10}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C40C09E-11AD-4325-BAE8-32EB0D0E9DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C40C09E-11AD-4325-BAE8-32EB0D0E9DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C40C09E-11AD-4325-BAE8-32EB0D0E9DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C40C09E-11AD-4325-BAE8-32EB0D0E9DF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
