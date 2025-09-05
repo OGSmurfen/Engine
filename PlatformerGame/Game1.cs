@@ -1,4 +1,5 @@
-﻿using Graphics;
+﻿using EngineCore.Collision;
+using Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,16 +17,21 @@ namespace PlatformerGame
         private Vector2 _slimePosition;
         private const float MOVEMENT_SPEED = 5f;
 
-        public Game1() : base("Platformer Game", 1280, 720, false)
+        private Vector2 _batPosition;
+        private Vector2 _batVelocity;
+
+        public Game1() : base("Dungeon Slime", 1280, 720, false)
         {
 
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
+
+            _batPosition = new Vector2(_slime.Width + 10, 0);
+
+            AssignRandomBatVelocity();
         }
 
         protected override void LoadContent()
@@ -48,21 +54,59 @@ namespace PlatformerGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
             _slime.Update(gameTime);
             _bat.Update(gameTime);
 
             CheckKeyboardInput();
 
+            Rectangle screenBounds = new Rectangle(0, 0,
+                GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight);
+
+            Circle slimeBounds = new Circle(
+                new Point((int)(_slimePosition.X + _slime.Width * 0.5f), (int)(_slimePosition.Y + _slime.Width * 0.5f)), (int)_slime.Width
+            );
+
+            if(slimeBounds.Left < screenBounds.Left)
+            {
+                _slimePosition.X = screenBounds.Left;
+            }
+
+            Vector2 newBatPosition = _batPosition + _batVelocity;
+
+
+
+
+            _batPosition = newBatPosition;
+
+
+
+
             base.Update(gameTime);
         }
+
+
+        private void AssignRandomBatVelocity()
+        {
+            // Generate a random angle.
+            float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
+
+            // Convert angle to a direction vector.
+            float x = (float)Math.Cos(angle);
+            float y = (float)Math.Sin(angle);
+            Vector2 direction = new Vector2(x, y);
+
+            // Multiply the direction vector by the movement speed.
+            _batVelocity = direction * MOVEMENT_SPEED;
+        }
+
+
         private void CheckKeyboardInput()
         {
             float speed = MOVEMENT_SPEED;
             if (Input.Keyboard.IsKeyDown(Keys.Space))
                 speed *= 2f;
 
-            if(Input.Keyboard.IsKeyDown(Keys.W) || Input.Keyboard.IsKeyDown(Keys.Up))
+            if (Input.Keyboard.IsKeyDown(Keys.W) || Input.Keyboard.IsKeyDown(Keys.Up))
                 _slimePosition.Y -= speed;
 
             if (Input.Keyboard.IsKeyDown(Keys.A) || Input.Keyboard.IsKeyDown(Keys.Left))
@@ -85,7 +129,7 @@ namespace PlatformerGame
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             _slime.Draw(SpriteBatch, _slimePosition);
-            _bat.Draw(SpriteBatch, new Vector2(_slime.Width + 10, 0));
+            _bat.Draw(SpriteBatch, _batPosition);
 
             SpriteBatch.End();
 
