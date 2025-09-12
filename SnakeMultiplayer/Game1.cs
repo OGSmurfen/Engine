@@ -209,6 +209,11 @@ namespace SnakeMultiplayer
 
             ImGui.Begin("Snake Multiplayer");
 
+            if( ImGui.Button("Start"))
+            {
+                gameState = GameState.Playing;
+            }
+
             ImGui.End();
 
             _guiRenderer.EndLayout();
