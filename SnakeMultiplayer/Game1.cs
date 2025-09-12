@@ -47,7 +47,10 @@ namespace SnakeMultiplayer
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            
+
+            UDPSender.Instance.Connect("127.0.0.1", 6969);
+
+
         }
 
         protected override void LoadContent()
@@ -71,6 +74,7 @@ namespace SnakeMultiplayer
             // TODO: Add your update logic here
             MoveSnake();
 
+            UDPSender.Instance.SendSnakeSegments(_snakeSegments);
 
             base.Update(gameTime);
         }
