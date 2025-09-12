@@ -217,7 +217,7 @@ namespace SnakeMultiplayer
             }
             if (ImGui.Button("Host"))
             {
-                UDPSender.Instance.Connect("127.0.0.1", 6969);
+                UDPSender.Instance.Connect("127.0.0.1", 6969); // 10.80.55.62
                 connectionState = ConnectionState.Host;
             }
             if (ImGui.Button("Join"))
