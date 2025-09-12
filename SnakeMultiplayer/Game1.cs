@@ -11,6 +11,8 @@ namespace SnakeMultiplayer
 {
     public class Game1 : Game
     {
+
+        private string ipAddressToSendTo = "";
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -215,9 +217,10 @@ namespace SnakeMultiplayer
             {
                 gameState = GameState.Playing;
             }
+            ImGui.InputText("IP Address", ref ipAddressToSendTo, 100);
             if (ImGui.Button("Host"))
             {
-                UDPSender.Instance.Connect("127.0.0.1", 6969); // 10.80.55.62
+                UDPSender.Instance.Connect(ipAddressToSendTo, 6969); // 10.80.55.62
                 connectionState = ConnectionState.Host;
             }
             if (ImGui.Button("Join"))
