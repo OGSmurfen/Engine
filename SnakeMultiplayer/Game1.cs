@@ -20,6 +20,7 @@ namespace SnakeMultiplayer
         private int _appleWidth = 20;
         private Rectangle _applePosition;
 
+
         private enum Direction
         {
             Up,
@@ -68,52 +69,70 @@ namespace SnakeMultiplayer
                 Exit();
 
             // TODO: Add your update logic here
+            MoveSnake();
+
+
+            base.Update(gameTime);
+        }
+
+        private void MoveSnake()
+        {
             var keyboardState = Keyboard.GetState();
 
-            if (_currentDirection != Direction.Down &&( keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)))
+            if (_currentDirection != Direction.Down && (keyboardState.IsKeyDown(Keys.Up) || keyboardState.IsKeyDown(Keys.W)))
+            {
                 _currentDirection = Direction.Up;
+            }
             else if (_currentDirection != Direction.Up && (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S)))
+            {
                 _currentDirection = Direction.Down;
+            }
             else if (_currentDirection != Direction.Right && (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)))
+            {
                 _currentDirection = Direction.Left;
+            }
             else if (_currentDirection != Direction.Left && (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)))
+            {
                 _currentDirection = Direction.Right;
+            }
 
+
+            var head = _snakeSegments[0];
             switch (_currentDirection)
             {
                 case Direction.Up:
-                    for(int i = 0; i < _snakeSegments.Count; i++)
                     {
-                        var segment = _snakeSegments[i];
-                        segment.Y -= _snakeSpeed;
-                        _snakeSegments[i] = segment;
+                        head.Y -= _snakeSpeed;
+                        break;
                     }
-                    break;
                 case Direction.Down:
-                    for (int i = 0; i < _snakeSegments.Count; i++)
                     {
-                        var segment = _snakeSegments[i];
-                        segment.Y += _snakeSpeed;
-                        _snakeSegments[i] = segment;
+                        head.Y += _snakeSpeed;
+                        break;
                     }
-                    break;
                 case Direction.Left:
-                    for (int i = 0; i < _snakeSegments.Count; i++)
                     {
-                        var segment = _snakeSegments[i];
-                        segment.X -= _snakeSpeed;
-                        _snakeSegments[i] = segment;
+                        head.X -= _snakeSpeed;
+                        break;
                     }
-                    break;
                 case Direction.Right:
-                    for (int i = 0; i < _snakeSegments.Count; i++)
                     {
-                        var segment = _snakeSegments[i];
-                        segment.X += _snakeSpeed;
-                        _snakeSegments[i] = segment;
+                        head.X += _snakeSpeed;
+                        break;
                     }
-                    break;
             }
+
+            if (head.X < 0) head.X = _graphics.PreferredBackBufferWidth;
+            if (head.X > _graphics.PreferredBackBufferWidth) head.X = 0;
+            if (head.Y < 0) head.Y = _graphics.PreferredBackBufferHeight;
+            if (head.Y > _graphics.PreferredBackBufferHeight) head.Y = 0;
+
+            for (int i = _snakeSegments.Count - 1; i > 0; i--)
+            {
+                _snakeSegments[i] = _snakeSegments[i - 1];
+            }
+
+            _snakeSegments[0] = head;
 
             if (_snakeSegments[0].Intersects(_applePosition))
             {
@@ -122,9 +141,9 @@ namespace SnakeMultiplayer
                 var random = new Random();
                 _applePosition = new Rectangle(random.Next(_graphics.PreferredBackBufferWidth),
                         random.Next(_graphics.PreferredBackBufferHeight), _appleWidth, _appleWidth);
-            }
 
-            base.Update(gameTime);
+                _snakeSpeed += 1;
+            }
         }
 
         protected override void Draw(GameTime gameTime)
