@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ImGuiNET;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.ImGuiNet;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
@@ -12,6 +14,8 @@ namespace SnakeMultiplayer
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        public static ImGuiRenderer _guiRenderer;
+
         Texture2D _basicTexture;
         List<Rectangle> _snakeSegments;
         private const int _snakeWidth = 40;
@@ -20,6 +24,7 @@ namespace SnakeMultiplayer
         private int _appleWidth = 20;
         private Rectangle _applePosition;
 
+        private GameState gameState;
 
         private enum Direction
         {
@@ -40,14 +45,16 @@ namespace SnakeMultiplayer
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            gameState = GameState.Menu;
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _guiRenderer = new ImGuiRenderer(this);
+            UDPSender.Instance.Connect("127.0.0.1", 6969);
 
             base.Initialize();
-            
         }
 
         protected override void LoadContent()
@@ -61,6 +68,9 @@ namespace SnakeMultiplayer
             _applePosition = new Rectangle(300, 300, _appleWidth, _appleWidth);
             _snakeSegments = new();
             _snakeSegments.Add(new Rectangle(100, 100, _snakeWidth, _snakeWidth));
+
+           
+            _guiRenderer.RebuildFontAtlas();
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,8 +79,22 @@ namespace SnakeMultiplayer
                 Exit();
 
             // TODO: Add your update logic here
-            MoveSnake();
 
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    {
+                    
+                    }
+                    break;
+                case GameState.Playing:
+                    {
+                        MoveSnake();
+
+                        UDPSender.Instance.SendSnakeSegments(_snakeSegments);
+                    }
+                    break;
+            }
 
             base.Update(gameTime);
         }
@@ -151,21 +175,43 @@ namespace SnakeMultiplayer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
             _spriteBatch.Begin();
 
-            for (int i = 0; i < _snakeSegments.Count; i++)
-            {
-                if (i == 0)
-                    _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.DarkGreen);
-                else
-                    _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.Green);
-            }
 
-            _spriteBatch.Draw(_basicTexture, _applePosition, Color.Red);
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    {
+
+                    }
+                    break;
+                case GameState.Playing:
+                    {
+                        for (int i = 0; i < _snakeSegments.Count; i++)
+                        {
+                            if (i == 0)
+                                _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.DarkGreen);
+                            else
+                                _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.Green);
+                        }
+
+                        _spriteBatch.Draw(_basicTexture, _applePosition, Color.Red);
+                    }
+                    break;
+            }
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
+            _guiRenderer.BeginLayout(gameTime);
+
+            ImGui.Begin("Snake Multiplayer");
+
+            ImGui.End();
+
+            _guiRenderer.EndLayout();
         }
     }
 }

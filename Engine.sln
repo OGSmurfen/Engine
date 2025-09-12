@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineCore", "EngineCore\En
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMultiplayer", "SnakeMultiplayer\SnakeMultiplayer.csproj", "{D2495839-9A5E-4053-9997-16390F832AD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeUDPListener", "SnakeUDPListener\SnakeUDPListener.csproj", "{A098E73A-2CF5-4C29-83A4-FC28F774F862}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monogame.ImGuiNet", "..\..\fun\Engine\MonoGame.ImGuiNet-main\MonoGame.ImGuiNet\Monogame.ImGuiNet.csproj", "{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{D2495839-9A5E-4053-9997-16390F832AD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2495839-9A5E-4053-9997-16390F832AD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2495839-9A5E-4053-9997-16390F832AD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
