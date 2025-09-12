@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMultiplayer", "SnakeMu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeUDPListener", "SnakeUDPListener\SnakeUDPListener.csproj", "{A098E73A-2CF5-4C29-83A4-FC28F774F862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monogame.ImGuiNet", "..\..\fun\Engine\MonoGame.ImGuiNet-main\MonoGame.ImGuiNet\Monogame.ImGuiNet.csproj", "{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monogame.ImGuiNet", "MonoGame.ImGuiNet-main\MonoGame.ImGuiNet\Monogame.ImGuiNet.csproj", "{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A098E73A-2CF5-4C29-83A4-FC28F774F862}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E6EE19C-849D-9318-4CC0-D42DC4C6AFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
