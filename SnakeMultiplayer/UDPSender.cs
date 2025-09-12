@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace SnakeMultiplayer
         private static UDPSender _instance;
 
         private UdpClient udpClient;
+
+        public bool IsConnected { get; private set; }
 
         public static UDPSender Instance
         {
@@ -28,6 +31,7 @@ namespace SnakeMultiplayer
 
         public void Connect(string ipAddress, int port)
         {
+            IsConnected = true;
             udpClient.Connect(ipAddress, port);
         }
         

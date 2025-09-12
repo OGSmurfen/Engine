@@ -25,6 +25,7 @@ namespace SnakeMultiplayer
         private Rectangle _applePosition;
 
         private GameState gameState;
+        private ConnectionState connectionState;
 
         private enum Direction
         {
@@ -46,13 +47,13 @@ namespace SnakeMultiplayer
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             gameState = GameState.Menu;
+            connectionState = ConnectionState.None;
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
             _guiRenderer = new ImGuiRenderer(this);
-            UDPSender.Instance.Connect("127.0.0.1", 6969);
 
             base.Initialize();
         }
@@ -91,7 +92,8 @@ namespace SnakeMultiplayer
                     {
                         MoveSnake();
 
-                        UDPSender.Instance.SendSnakeSegments(_snakeSegments);
+                        if(UDPSender.Instance.IsConnected)
+                            UDPSender.Instance.SendSnakeSegments(_snakeSegments);
                     }
                     break;
             }
@@ -207,11 +209,20 @@ namespace SnakeMultiplayer
 
             _guiRenderer.BeginLayout(gameTime);
 
-            ImGui.Begin("Snake Multiplayer");
+            ImGui.Begin("Snake X - Multiplayer");
 
             if( ImGui.Button("Start"))
             {
                 gameState = GameState.Playing;
+            }
+            if (ImGui.Button("Host"))
+            {
+                UDPSender.Instance.Connect("127.0.0.1", 6969);
+                connectionState = ConnectionState.Host;
+            }
+            if (ImGui.Button("Join"))
+            {
+                connectionState = ConnectionState.Join;
             }
 
             ImGui.End();
