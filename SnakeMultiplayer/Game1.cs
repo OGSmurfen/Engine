@@ -20,6 +20,7 @@ namespace SnakeMultiplayer
         private int _appleWidth = 20;
         private Rectangle _applePosition;
 
+        private GameState gameState;
 
         private enum Direction
         {
@@ -40,6 +41,7 @@ namespace SnakeMultiplayer
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            gameState = GameState.Menu;
         }
 
         protected override void Initialize()
@@ -72,9 +74,22 @@ namespace SnakeMultiplayer
                 Exit();
 
             // TODO: Add your update logic here
-            MoveSnake();
 
-            UDPSender.Instance.SendSnakeSegments(_snakeSegments);
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    {
+                    
+                    }
+                    break;
+                case GameState.Playing:
+                    {
+                        MoveSnake();
+
+                        UDPSender.Instance.SendSnakeSegments(_snakeSegments);
+                    }
+                    break;
+            }
 
             base.Update(gameTime);
         }
@@ -155,17 +170,31 @@ namespace SnakeMultiplayer
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
             _spriteBatch.Begin();
 
-            for (int i = 0; i < _snakeSegments.Count; i++)
-            {
-                if (i == 0)
-                    _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.DarkGreen);
-                else
-                    _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.Green);
-            }
 
-            _spriteBatch.Draw(_basicTexture, _applePosition, Color.Red);
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    {
+
+                    }
+                    break;
+                case GameState.Playing:
+                    {
+                        for (int i = 0; i < _snakeSegments.Count; i++)
+                        {
+                            if (i == 0)
+                                _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.DarkGreen);
+                            else
+                                _spriteBatch.Draw(_basicTexture, _snakeSegments[i], Color.Green);
+                        }
+
+                        _spriteBatch.Draw(_basicTexture, _applePosition, Color.Red);
+                    }
+                    break;
+            }
 
             _spriteBatch.End();
 

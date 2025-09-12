@@ -38,7 +38,6 @@ namespace SnakeUDPListener
 
             }
 
-            Console.WriteLine("Program ended");
         }
     }
 }
