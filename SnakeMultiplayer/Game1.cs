@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using ImGuiNET;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.ImGuiNet;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
@@ -11,6 +13,8 @@ namespace SnakeMultiplayer
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        public static ImGuiRenderer _guiRenderer;
 
         Texture2D _basicTexture;
         List<Rectangle> _snakeSegments;
@@ -47,12 +51,10 @@ namespace SnakeMultiplayer
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            base.Initialize();
-
+            _guiRenderer = new ImGuiRenderer(this);
             UDPSender.Instance.Connect("127.0.0.1", 6969);
 
-
+            base.Initialize();
         }
 
         protected override void LoadContent()
@@ -66,6 +68,9 @@ namespace SnakeMultiplayer
             _applePosition = new Rectangle(300, 300, _appleWidth, _appleWidth);
             _snakeSegments = new();
             _snakeSegments.Add(new Rectangle(100, 100, _snakeWidth, _snakeWidth));
+
+           
+            _guiRenderer.RebuildFontAtlas();
         }
 
         protected override void Update(GameTime gameTime)
@@ -199,6 +204,14 @@ namespace SnakeMultiplayer
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
+            _guiRenderer.BeginLayout(gameTime);
+
+            ImGui.Begin("Snake Multiplayer");
+
+            ImGui.End();
+
+            _guiRenderer.EndLayout();
         }
     }
 }
