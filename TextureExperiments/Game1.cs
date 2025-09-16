@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Animator;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -13,8 +14,9 @@ namespace TextureExperiments
         Texture2D _slimeTexture;
         List<Rectangle> _textureAnimations;
         int currentAnimation = 0;
-        float elapsedAnimationTime = 0;
-        float animationDurationTime = .15f;
+        float elapsedFrameTime = 0;
+        float frameDurationTime = .15f;
+        Animation _slimeAnimation;
 
         public Game1()
         {
@@ -27,21 +29,22 @@ namespace TextureExperiments
         {
             // TODO: Add your initialization logic here
             _slimeTexture = Texture2D.FromFile(GraphicsDevice, "Content/tex.png");
-            _textureAnimations = new List<Rectangle>
-            { 
-                new Rectangle(10, 0, 50, 60),
-                new Rectangle(60, 0, 60, 60),
-                new Rectangle(120, 0, 60, 60),
-                new Rectangle(180, 0, 60, 60)
-            };
-
-
+            
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            List<Sprite> slimeSprites = new List<Sprite>
+            {
+                new Sprite(_slimeTexture, new Rectangle(10, 0, 50, 60)),
+                new Sprite(_slimeTexture, new Rectangle(60, 0, 60, 60)),
+                new Sprite(_slimeTexture, new Rectangle(120, 0, 60, 60)),
+                new Sprite(_slimeTexture, new Rectangle(180, 0, 60, 60)),
+            };
+            _slimeAnimation = new Animation(slimeSprites, .15f);
 
             // TODO: use this.Content to load your game content here
         }
@@ -52,6 +55,7 @@ namespace TextureExperiments
                 Exit();
 
             // TODO: Add your update logic here
+            _slimeAnimation.Loop(gameTime);
 
             base.Update(gameTime);
         }
@@ -65,18 +69,7 @@ namespace TextureExperiments
 
             _spriteBatch.Begin();
 
-            
-            _spriteBatch.Draw(_slimeTexture, new Vector2(100, 100), _textureAnimations[currentAnimation], Color.White);
-
-            elapsedAnimationTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if(elapsedAnimationTime >= animationDurationTime)
-            {
-                currentAnimation++;
-                elapsedAnimationTime = 0;
-            }
-            
-            if(currentAnimation >= _textureAnimations.Count) currentAnimation = 0;
+            _slimeAnimation.DrawCurrentFrame(new Vector2(100, 100), _spriteBatch);
 
             _spriteBatch.End();
 
