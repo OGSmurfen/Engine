@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.ImGuiNet;
 using System.Collections.Generic;
 
 namespace TextureExperiments
@@ -12,11 +13,10 @@ namespace TextureExperiments
         private SpriteBatch _spriteBatch;
 
         Texture2D _slimeTexture;
-        List<Rectangle> _textureAnimations;
-        int currentAnimation = 0;
-        float elapsedFrameTime = 0;
-        float frameDurationTime = .15f;
+
         Animation _slimeAnimation;
+
+        private ImGuiRenderer imGuiRenderer;
 
         public Game1()
         {
@@ -29,7 +29,7 @@ namespace TextureExperiments
         {
             // TODO: Add your initialization logic here
             _slimeTexture = Texture2D.FromFile(GraphicsDevice, "Content/tex.png");
-            
+            imGuiRenderer = new ImGuiRenderer(this);
             base.Initialize();
         }
 
@@ -46,6 +46,8 @@ namespace TextureExperiments
             };
             _slimeAnimation = new Animation(slimeSprites, .15f);
 
+            imGuiRenderer.RebuildFontAtlas();
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -55,7 +57,7 @@ namespace TextureExperiments
                 Exit();
 
             // TODO: Add your update logic here
-            _slimeAnimation.Loop(gameTime);
+            
 
             base.Update(gameTime);
         }
@@ -69,11 +71,17 @@ namespace TextureExperiments
 
             _spriteBatch.Begin();
 
-            _slimeAnimation.DrawCurrentFrame(new Vector2(100, 100), _spriteBatch);
+            _slimeAnimation.DrawAndLoop(new Vector2(100, 100), _spriteBatch, gameTime);
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+
+            imGuiRenderer.BeginLayout(gameTime);
+
+
+
+            imGuiRenderer.EndLayout();
         }
     }
 }

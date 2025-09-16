@@ -21,7 +21,12 @@ namespace Animator
             FrameDuration = animationDuration;
         }
 
-        public void Loop(GameTime gameTime)
+        public void DrawAndLoop(Vector2 location, SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            DrawCurrentFrame(location, spriteBatch);
+            LoopAnimation(gameTime);
+        }
+        public void LoopAnimation(GameTime gameTime)
         {
             elapsedFrameTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
