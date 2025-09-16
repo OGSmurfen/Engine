@@ -1,8 +1,10 @@
 ﻿using Animator;
+using ImGuiNET;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.ImGuiNet;
+using MyEngineImpl;
 using System.Collections.Generic;
 
 namespace TextureExperiments
@@ -12,9 +14,9 @@ namespace TextureExperiments
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        Texture2D _slimeTexture;
+        
 
-        Animation _slimeAnimation;
+        List<GameObject> _gameObjects = new List<GameObject>();
 
         private ImGuiRenderer imGuiRenderer;
 
@@ -23,12 +25,13 @@ namespace TextureExperiments
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _slimeTexture = Texture2D.FromFile(GraphicsDevice, "Content/tex.png");
+            
             imGuiRenderer = new ImGuiRenderer(this);
             base.Initialize();
         }
@@ -37,14 +40,25 @@ namespace TextureExperiments
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Texture2D slimeTexture = Texture2D.FromFile(GraphicsDevice, "Content/tex.png");
+
             List<Sprite> slimeSprites = new List<Sprite>
             {
-                new Sprite(_slimeTexture, new Rectangle(10, 0, 50, 60)),
-                new Sprite(_slimeTexture, new Rectangle(60, 0, 60, 60)),
-                new Sprite(_slimeTexture, new Rectangle(120, 0, 60, 60)),
-                new Sprite(_slimeTexture, new Rectangle(180, 0, 60, 60)),
+                new Sprite(slimeTexture, new Rectangle(10, 0, 50, 60)),
+                new Sprite(slimeTexture, new Rectangle(60, 0, 60, 60)),
+                new Sprite(slimeTexture, new Rectangle(120, 0, 60, 60)),
+                new Sprite(slimeTexture, new Rectangle(180, 0, 60, 60)),
             };
-            _slimeAnimation = new Animation(slimeSprites, .15f);
+
+            Animation slimeAnimation = new Animation(slimeSprites, .15f);
+
+            GameObject slime = new GameObject
+            {
+                Position = new Vector2(100, 100),
+                Animation = slimeAnimation,
+            };
+
+            _gameObjects.Add(slime);
 
             imGuiRenderer.RebuildFontAtlas();
 
@@ -71,7 +85,9 @@ namespace TextureExperiments
 
             _spriteBatch.Begin();
 
-            _slimeAnimation.DrawAndLoop(new Vector2(100, 100), _spriteBatch, gameTime);
+
+            foreach (var go in _gameObjects)
+                go.Update(_spriteBatch, gameTime);
 
             _spriteBatch.End();
 
@@ -79,7 +95,12 @@ namespace TextureExperiments
 
             imGuiRenderer.BeginLayout(gameTime);
 
+            ImGui.Begin("Menu");
+            if (ImGui.Button("AddSprite"))
+            {
 
+            }
+            ImGui.End();
 
             imGuiRenderer.EndLayout();
         }

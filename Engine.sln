@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monogame.ImGuiNet", "MonoGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureExperiments", "TextureExperiments\TextureExperiments.csproj", "{868949DF-4792-44B9-ACA4-CAFBAEF0105F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animator", "Animator\Animator.csproj", "{708A972B-32BF-4F15-AED2-3195EAF84BA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyEngineImpl", "Animator\MyEngineImpl.csproj", "{708A972B-32BF-4F15-AED2-3195EAF84BA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
