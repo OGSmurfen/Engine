@@ -94,12 +94,11 @@ namespace TextureExperiments
 
             imGuiRenderer.BeginLayout(gameTime);
 
-            ImGui.Begin("Menu");
+            ImGui.Begin("Scene");
             
             foreach(var gameObject in _scene.GameObjects)
             {
                 var pos = gameObject.Position.ToNumerics();
-
                 if (ImGui.DragFloat2("Position", ref pos))
                 {
                     gameObject.Position = new Vector2(pos[0], pos[1]);
