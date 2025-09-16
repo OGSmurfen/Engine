@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeUDPListener", "SnakeUD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monogame.ImGuiNet", "MonoGame.ImGuiNet-main\MonoGame.ImGuiNet\Monogame.ImGuiNet.csproj", "{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextureExperiments", "TextureExperiments\TextureExperiments.csproj", "{868949DF-4792-44B9-ACA4-CAFBAEF0105F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animator", "Animator\Animator.csproj", "{708A972B-32BF-4F15-AED2-3195EAF84BA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC8E9F15-EE3A-9B06-D5FD-FB9DBA6E00FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868949DF-4792-44B9-ACA4-CAFBAEF0105F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868949DF-4792-44B9-ACA4-CAFBAEF0105F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868949DF-4792-44B9-ACA4-CAFBAEF0105F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868949DF-4792-44B9-ACA4-CAFBAEF0105F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{708A972B-32BF-4F15-AED2-3195EAF84BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{708A972B-32BF-4F15-AED2-3195EAF84BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{708A972B-32BF-4F15-AED2-3195EAF84BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{708A972B-32BF-4F15-AED2-3195EAF84BA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
