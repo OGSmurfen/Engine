@@ -15,8 +15,7 @@ namespace TextureExperiments
         private SpriteBatch _spriteBatch;
 
         
-
-        List<GameObject> _gameObjects = new List<GameObject>();
+        Scene _scene = new Scene();
 
         private ImGuiRenderer imGuiRenderer;
 
@@ -58,7 +57,7 @@ namespace TextureExperiments
                 Animation = slimeAnimation,
             };
 
-            _gameObjects.Add(slime);
+            _scene.AddGameObject(slime);
 
             imGuiRenderer.RebuildFontAtlas();
 
@@ -86,8 +85,8 @@ namespace TextureExperiments
             _spriteBatch.Begin();
 
 
-            foreach (var go in _gameObjects)
-                go.Update(_spriteBatch, gameTime);
+            foreach (var gameObject in _scene.GameObjects)
+                gameObject.Update(_spriteBatch, gameTime);
 
             _spriteBatch.End();
 
@@ -96,10 +95,9 @@ namespace TextureExperiments
             imGuiRenderer.BeginLayout(gameTime);
 
             ImGui.Begin("Menu");
-            if (ImGui.Button("AddSprite"))
-            {
+            
 
-            }
+
             ImGui.End();
 
             imGuiRenderer.EndLayout();

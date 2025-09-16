@@ -7,8 +7,8 @@ namespace MyEngineImpl
     public class GameObject
     {
         public Vector2 Position { get; set; }
-        public Sprite Sprite { get; set; }
-        public Animation Animation { get; set; }
+        public Sprite? Sprite { get; set; } = null!;
+        public Animation? Animation { get; set; } = null!;
 
         public void Update(SpriteBatch spriteBatch, GameTime gameTime)
         {
