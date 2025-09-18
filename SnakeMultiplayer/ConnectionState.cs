@@ -8,8 +8,8 @@ namespace SnakeMultiplayer
 {
     public enum ConnectionState
     {
-        Host,
-        Join,
+        Snake,
+        Apple,
         None
     }
 }

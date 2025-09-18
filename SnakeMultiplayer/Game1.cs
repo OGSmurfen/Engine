@@ -94,8 +94,21 @@ namespace SnakeMultiplayer
                     {
                         MoveSnake();
 
-                        if(UDPSender.Instance.IsConnected)
-                            UDPSender.Instance.SendSnakeSegments(_snakeSegments);
+                        switch (connectionState)
+                        {
+                            case ConnectionState.Apple:
+                                {
+                                    
+                                }
+                                break;
+                            case ConnectionState.Snake:
+                                {
+                                    UDPPeer.Instance.SendSnakeLocation(_snakeSegments, ipAddressToSendTo);
+                                }
+                                break;
+                        }
+                        
+
                     }
                     break;
             }
@@ -218,14 +231,13 @@ namespace SnakeMultiplayer
                 gameState = GameState.Playing;
             }
             ImGui.InputText("IP Address", ref ipAddressToSendTo, 100);
-            if (ImGui.Button("Host"))
+            if (ImGui.Button("Snake"))
             {
-                UDPSender.Instance.Connect(ipAddressToSendTo, 6969); // 10.80.55.62
-                connectionState = ConnectionState.Host;
+                connectionState = ConnectionState.Snake;
             }
-            if (ImGui.Button("Join"))
+            if (ImGui.Button("Apple"))
             {
-                connectionState = ConnectionState.Join;
+                connectionState = ConnectionState.Apple;
             }
 
             ImGui.End();
