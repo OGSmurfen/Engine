@@ -98,7 +98,7 @@ namespace SnakeMultiplayer
                         {
                             case ConnectionState.Apple:
                                 {
-                                    
+                                    _snakeSegments = UDPPeer.Instance.ReceiveSnakeLocation();
                                 }
                                 break;
                             case ConnectionState.Snake:
@@ -226,17 +226,19 @@ namespace SnakeMultiplayer
 
             ImGui.Begin("Snake X - Multiplayer");
 
-            if( ImGui.Button("Start"))
-            {
-                gameState = GameState.Playing;
-            }
+            //if( ImGui.Button("Start"))
+            //{
+            //    gameState = GameState.Playing;
+            //}
             ImGui.InputText("IP Address", ref ipAddressToSendTo, 100);
             if (ImGui.Button("Snake"))
             {
+                gameState = GameState.Playing;
                 connectionState = ConnectionState.Snake;
             }
             if (ImGui.Button("Apple"))
             {
+                gameState = GameState.Playing;
                 connectionState = ConnectionState.Apple;
             }
 

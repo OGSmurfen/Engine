@@ -33,12 +33,23 @@ namespace SnakeMultiplayer
         {
             string json = JsonSerializer.Serialize(snakeSegments, new JsonSerializerOptions { IncludeFields = true });
             byte[] bytes = Encoding.UTF8.GetBytes(json);
-            _udp.Send(bytes, bytes.Length, IPEndPoint.Parse(ip));
+            _udp.Send(bytes, bytes.Length, ip, 6969);
         }
 
-        public void ReceiveSnakeLocation()
+        public List<Rectangle> ReceiveSnakeLocation()
         {
+            var ep = new IPEndPoint(IPAddress.Any, 6969);
+            byte[] bytes = _udp.Receive(ref ep);
+            //byte[] bytes = res.Buffer;
 
+            string jsonStr = System.Text.Encoding.UTF8.GetString(bytes);
+
+            if (string.IsNullOrEmpty(jsonStr))
+                return null;
+
+            List<Rectangle> snakeSegments = JsonSerializer.Deserialize<List<Rectangle>>(jsonStr, new JsonSerializerOptions { IncludeFields = true });
+
+            return snakeSegments;
         }
 
 
