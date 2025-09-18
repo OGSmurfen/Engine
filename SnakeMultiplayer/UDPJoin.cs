@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace SnakeMultiplayer
 {
-    public class UDPSender : IDisposable
+    public class UDPJoin : IDisposable
     {
-        private static UDPSender _instance;
+        private static UDPJoin _instance;
 
         private UdpClient udpClient;
 
         public bool IsConnected { get; private set; }
 
-        public static UDPSender Instance
+        public static UDPJoin Instance
         {
             get 
             { 
             if(_instance == null)
-                _instance = new UDPSender();
+                _instance = new UDPJoin();
 
             return _instance;
             }
@@ -42,7 +42,7 @@ namespace SnakeMultiplayer
             udpClient.Send(bytes, bytes.Length);
         }
 
-        private UDPSender()
+        private UDPJoin()
         {
             udpClient = new UdpClient();
         }
