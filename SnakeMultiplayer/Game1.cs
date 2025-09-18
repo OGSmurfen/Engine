@@ -225,11 +225,7 @@ namespace SnakeMultiplayer
             _guiRenderer.BeginLayout(gameTime);
 
             ImGui.Begin("Snake X - Multiplayer");
-
-            //if( ImGui.Button("Start"))
-            //{
-            //    gameState = GameState.Playing;
-            //}
+            
             ImGui.InputText("IP Address", ref ipAddressToSendTo, 100);
             if (ImGui.Button("Snake"))
             {

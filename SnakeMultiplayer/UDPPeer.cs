@@ -52,6 +52,26 @@ namespace SnakeMultiplayer
             return snakeSegments;
         }
 
+        public void SendAppleLocation(Rectangle applePosition, string ip)
+        {
+            string json = JsonSerializer.Serialize(applePosition, new JsonSerializerOptions { IncludeFields = true });
+            byte[] bytes = Encoding.UTF8.GetBytes(json);
+            _udp.Send(bytes, bytes.Length, ip, 6969);
+        }
+
+        public Rectangle ReceiveAppleLocation()
+        {
+            var ep = new IPEndPoint(IPAddress.Any, 6969);
+            byte[] bytes = _udp.Receive(ref ep);
+
+            string jsonStr = System.Text.Encoding.UTF8.GetString(bytes);
+            if (string.IsNullOrEmpty(jsonStr))
+                return Rectangle.Empty;
+
+            Rectangle applePosition = JsonSerializer.Deserialize<Rectangle>(jsonStr, new JsonSerializerOptions { IncludeFields = true });
+            return applePosition;
+        }
+
 
     }
 }
